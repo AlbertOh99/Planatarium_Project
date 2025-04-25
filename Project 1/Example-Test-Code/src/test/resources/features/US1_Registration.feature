@@ -9,8 +9,9 @@ Feature: User Registration
   # Happy Path Scenario
   Scenario: Valid credential data should allow for be registration with the Planetarium
 
-    When    the user provides a valid username
-    And     the user provides a valid password
+    When    the user provides username "Robin" while registering
+    And     the user provides password "Bobb1" while registering
+    When    the user clicks the register button
     # Note the syntax below, assuming you have a plugin for intelisence
     # the section wrapped in quotes tells Cucumber you want to inject the data
     # into the step code that is executed
@@ -23,6 +24,7 @@ Feature: User Registration
     # The "<>" has cucumber look to a data table with the column name of what is inside the diamond brackets.
     When    the user provides username "<username>" while registering
     And     the user provides password "<password>" while registering
+    When    the user clicks the register button
     Then    an alert should appear saying "<message>"
     And     the user should remain on the register page
 
@@ -37,10 +39,10 @@ Feature: User Registration
     |3obin   |Bobb1   |Invalid username|
     |thisoverthirtycharacterssssssss|Bobb1|Invalid username|
     # invalid password
-    |Robin   |Bobb3   |Invalid Password|
-    |Robin   |bobby   |Invalid Password|
-    |Robin   |Bobby   |Invalid Password|
-    |Robin   |bobb3   |Invalid Password|
-    |Robin   |BOBB3   |Invalid Password|
-    |Robin   |Bobb3!? |Invalid Password|
-    |Robin   |3obbY   |Invalid Password|
+    |Robin   |Bob3   |Invalid password|
+    |Robin   |bobby   |Invalid password|
+    |Robin   |Bobby   |Invalid password|
+    |Robin   |bobb3   |Invalid password|
+    |Robin   |BOBB3   |Invalid password|
+    |Robin   |Bobb3!? |Invalid password|
+    |Robin   |3obbY   |Invalid password|

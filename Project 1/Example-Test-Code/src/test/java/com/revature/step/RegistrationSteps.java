@@ -1,25 +1,39 @@
 package com.revature.step;
 
+import static com.revature.TestRunner.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
+import org.openqa.selenium.Alert;
 
 public class RegistrationSteps {
-    /*
-        Shared Setup Steps
-    */
+//        Shared Setup Steps
     @Given("the user is on the login page")
     public void the_user_is_on_the_login_page() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        loginPage.goToLoginPage();
     }
     @When("the user clicks the register link")
     public void the_user_clicks_the_register_link() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        loginPage.clickRegistrationLink();
     }
 
+    @When("the user provides username {string} while registering")
+    public void the_user_provides_username_while_registering(String username) {
+        // Write code here that turns the phrase above into concrete actions
+        registrationPage.enterUsername(username);
+    }
+    @When("the user provides password {string} while registering")
+    public void the_user_provides_password_while_registering(String password) {
+        // Write code here that turns the phrase above into concrete actions
+        registrationPage.enterPassword(password);
+    }
+
+    @When("the user clicks the register button")
+    public void the_user_clicks_the_register_button(){
+        registrationPage.clickRegisterButton();
+    }
     /*
         Note the step syntax below does not match 100% with what we have written in the Feature file.
         Cucumber is able to pass data to our clue methods at runtime, which can simplify the steps we write and
@@ -27,49 +41,22 @@ public class RegistrationSteps {
     */
     @Then("an alert should appear saying {string}")
     public void an_alert_should_appear_saying(String expectedMessage) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        registrationPage.waitForAlert();
+        Alert alert = driver.switchTo().alert();
+        String actualMessage = alert.getText();
+        alert.accept();
+        Assert.assertEquals(expectedMessage, actualMessage);
     }
 
-    /*
-        Happy Path Steps
-    */
-    @When("the user provides a valid username")
-    public void the_user_provides_a_valid_username() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
-    @And("the user provides a valid password")
-    public void the_user_provides_a_valid_password() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
-
-
+//        Happy Path Steps
     @Then("the user should be redirected to the login page")
     public void the_user_should_be_redirected_to_the_login_page() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        Assert.assertEquals(loginPage.getTitle(), driver.getTitle());
     }
 
-
-
-    /*
-        Sad Path Steps
-    */
-    @When("the user provides username {string} while registering")
-    public void the_user_provides_username_while_registering(String username) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
-    @When("the user provides password {string} while registering")
-    public void the_user_provides_password_while_registering(String password) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
+//        Sad Path Steps
     @Then("the user should remain on the register page")
     public void the_user_should_remain_on_the_register_page() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        Assert.assertEquals(registrationPage.getTitle(), driver.getTitle());
     }
 }

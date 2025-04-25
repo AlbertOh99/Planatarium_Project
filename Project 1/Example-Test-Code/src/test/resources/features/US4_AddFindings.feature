@@ -1,33 +1,32 @@
 Feature: Add new plant and moon findings
 
+  Background:
+    Given     the user is on the login page
+    And       the user logs in with their username "Batman" and password "Iamthenight1939"
   # Happy path for Planets
-  Scenario: As a user I would like to be able to add my planet findings
-    Given   the user is logged in and on their home page.
-    Given   the user has selected Planet on their drop down.
-    When    the user provides valid details for their planet name
-    And     the correct file type if they want to add a picture to thier discovered planet.
-    When    the user clicks on the Submit Planet button
-    Then    expected result should be the table refreshes with the correct updated information
+  Scenario Outline: As a user I would like to be able to add my planet findings
+    Given   the user has selected "Planet" on their drop down
+    When    the user provides details for their planet name "<planetName>"
+    And     the user provides file type for their planet image "<file>"
+    When    the user clicks on the Submit button
+    Then    expected result should be the table refreshes with the correct updated information with celestial name "<planetName>"
+    And     the user remains on home page
 
-    # Happy Path for Moons
-  Scenario: As a user I would like to be able to add my moon findings
-    Given   the user is logged in and on their home page.
-    Given   the user has selected Moon on their drop down.
-    When    the user provides correct details and files to create their Moon.
-    And     the correct file type if they want to add a picture to their discovered Moon.
-    When    the user clicks on the Submit Moon button
-    Then    expected result should be the table refreshes with the correct updated information
-
+    Examples:
+      | planetName                      | file |
+      | Earth2                          |D:\Revature\EricTrainingGithub\Copy of Instructor Notes\Project 1\Example-Test-Code\src\test\resources\images\goodJPG.jpg|
+      | Earth2                          |D:\Revature\EricTrainingGithub\Copy of Instructor Notes\Project 1\Example-Test-Code\src\test\resources\images\goodJPEG.jpeg|
+      | Earth2                          |D:\Revature\EricTrainingGithub\Copy of Instructor Notes\Project 1\Example-Test-Code\src\test\resources\images\goodPNG.png|
+      | Earth2                          |                                                                                                                       |
 
     # Sad path for Planets
   Scenario Outline: The user tries to upload a planet with invalid names or file type
-    Given the user is logged in and on their home page.
-    Given   the user has selected Planet on their drop down.
-    When    the user provides invalid details for their planet name "<planetName>"
-    And     the user provides invalid file type for their planet image "<file>"
-    When    the user clicks on the Submit Planet button
-    Then    should get an Alert message "<messages>"
-    Then    should remain on an unchanged home page.
+    Given   the user has selected "Planet" on their drop down
+    When    the user provides details for their planet name "<planetName>"
+    And     the user provides file type for their planet image "<file>"
+    When    the user clicks on the Submit button
+    Then    an alert should appear saying "<messages>"
+    And     the user remains on home page
 
     Examples:
       | planetName                      | file | messages            |
@@ -37,18 +36,34 @@ Feature: Add new plant and moon findings
       | E-arth_3%                       |      | Invalid planet name |
       | Earth                           |      | Invalid planet name |
       # invalid file
-      | Earth2                          | GIF  | Invalid file type   |
+      | Earth2                          | D:\Revature\EricTrainingGithub\Copy of Instructor Notes\Project 1\Example-Test-Code\src\test\resources\images\No.gif  | Invalid file type   |
 
+
+  # Happy Path for Moons
+  Scenario Outline: As a user I would like to be able to add my moon findings
+    Given   the user has selected "Moon" on their drop down
+    When    the user provides details for their moon name "<moonName>"
+    And     the user provides details for the planetID 1
+    And     the user provides file type for their moon image "<file>"
+    When    the user clicks on the Submit button
+    Then    expected result should be the table refreshes with the correct updated information with celestial name "<moonName>"
+    And     the user remains on home page
+
+    Examples:
+      | moonName                      | file |
+      | Moon2                          |D:\Revature\EricTrainingGithub\Copy of Instructor Notes\Project 1\Example-Test-Code\src\test\resources\images\goodJPG.jpg|
+      | Moon2                          |D:\Revature\EricTrainingGithub\Copy of Instructor Notes\Project 1\Example-Test-Code\src\test\resources\images\goodJPEG.jpeg|
+      | Moon2                          |D:\Revature\EricTrainingGithub\Copy of Instructor Notes\Project 1\Example-Test-Code\src\test\resources\images\goodPNG.png|
+      | Moon2                          |                                                                                                                       |
 
   Scenario Outline:The user tries to upload a moon with invalid names, planetID or file type
-    Given   the user is logged in and on their home page.
-    Given   the user has selected Moon on their drop down.
-    When    the user provides invalid details for their moon name "<moonName>"
-    And     the user provides invalid details for the planetID "<planetID>"
-    And     the user provides invalid file type for their moon image "<file>"
-    When    the user clicks on the Submit Moon button
-    Then    should get an Alert message "<messages>"
-    And     they should remain on an unchanged home page.
+    Given   the user has selected "Moon" on their drop down
+    When    the user provides details for their moon name "<moonName>"
+    And     the user provides details for the planetID <planetID>
+    And     the user provides file type for their moon image "<file>"
+    When    the user clicks on the Submit button
+    Then    an alert should appear saying "<messages>"
+    And     the user remains on home page
 
     Examples:
       | moonName                        | planetID | file | messages          |
@@ -56,8 +71,8 @@ Feature: Add new plant and moon findings
       |                                 | 1        |      | Invalid moon name |
       | TheMoonsNameIs31CharactersNowsW | 1        |      | Invalid moon name |
       | M-oon_3%                        | 1        |      | Invalid moon name |
-      | Moon                            | 1        |      | Invalid moon name |
+      | Luna                            | 1        |      | Invalid moon name |
       # Invalid planetID
       | Moon2                           | 100      |      | Invalid planet ID |
       # invalid file
-      | Moon2                           | 1        | GIF  | Invalid file type |
+      | Moon2                           | 1        | D:\Revature\EricTrainingGithub\Copy of Instructor Notes\Project 1\Example-Test-Code\src\test\resources\images\No.gif  | Invalid file type |

@@ -3,10 +3,9 @@ Feature: Securely Logging In
   # Happy Path
   Scenario: The user provides correct login information.
     Given   the user is on the login page
-    When    the user provides their login username
-    And     the user provides their login password
+    When    the user provides their login username "Batman"
+    And     the user provides their login password "Iamthenight1939"
     And     the user clicks on login
-    Then    expected end result should successfully login
     And     the user should be redirected to their home page
 
 
@@ -23,6 +22,6 @@ Feature: Securely Logging In
     Examples:
       | username | password        | message             |
     # Wrong username
-      | Batwoman | Iamthenight1939 | Invalid Credentials |
+      | Batwoman | Iamthenight1939 | Invalid credentials |
     # Wrong password
-      | Batman   | Iamtheday1939   | Invalid Credentials |
+      | Batman   | Iamtheday1939   | Invalid credentials |
