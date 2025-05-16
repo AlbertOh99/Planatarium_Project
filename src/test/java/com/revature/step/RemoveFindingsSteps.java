@@ -18,18 +18,6 @@ public class RemoveFindingsSteps {
     }
     @Then("expected result should be that the table is refresh with the correct data deleted {string}")
     public void expected_result_should_be_that_the_table_is_refresh_with_the_correct_data_deleted(String name) {
-//        ChatGPT solution, I don't understand it though
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
-//        // Wait
-//        wait.until(driver -> homePage.findNewRow(name).isEmpty());
-
-        // Need a slight delay as it tries to see if it is deleted too soon.
-        try {
-            Thread.sleep(200);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
 
         Assert.assertTrue(homePage.findNewRow(name).isEmpty());
     }
@@ -39,8 +27,6 @@ public class RemoveFindingsSteps {
     public void the_user_provides_invalid_name_for_the_celestial_name_they_wish_to_delete(String name) {
         homePage.enterDeleteInput(name);
     }
-
-
 
     //Sad path testing for deleting planet
     // Shares with happy path for planet

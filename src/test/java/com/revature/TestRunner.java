@@ -13,17 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 
-/*
-    We are going to let Junit be the test runner for our Cucumber/Selenium testing, but it needs to run Cucumber tests.
-    That is what the RunWith annotation is for: it tells Junit to allow Cucumber to run the tests.
 
-    You also need to tell Cucumber a few pieces of information:
-    - Where are the feature files
-    - Where are the glue methods
-    - What plugins do you want to use
-
-    You can configure this information using the @CucumberOptions annotation
- */
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "classpath:features",
@@ -31,7 +21,7 @@ import java.time.Duration;
         plugin = {"pretty", "html:src/test/resources/reports/Cucumber-Report.html"}
 )
 public class TestRunner {
-    //Here is where we will create our test resources: make them static for easy access in our steps
+    // Here is where we will create our test resources: make them static for easy access in our steps
     public static WebDriver driver;
     public static LoginPage loginPage;
     public static HomePage homePage;
@@ -39,7 +29,7 @@ public class TestRunner {
 
     @BeforeClass
     public static void setup() throws InterruptedException {
-        // here we initialize the resources and perform any other setup configurations
+        // Here we initialize the resources and perform any other setup configurations
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
         loginPage = new LoginPage(driver, "Planetarium Login");

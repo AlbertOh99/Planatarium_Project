@@ -8,10 +8,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-/*
-    Cucumber provides tools for executing some before/after scenarios are run. They are similar to the Junit setup
-    and teardown options in that they can before/after a scenario or before/after each individual step
- */
+
 public class CucumberHooks {
 
     // Using the Cucumber Before annotation we can make our method run before every scenario

@@ -14,10 +14,10 @@ Feature: Add new plant and moon findings
 
     Examples:
       | planetName                      | file |
-      | Earth2                          |D:\Revature\EricTrainingGithub\Copy of Instructor Notes\Project 1\Example-Test-Code\src\test\resources\images\goodJPG.jpg|
-      | Earth2                          |D:\Revature\EricTrainingGithub\Copy of Instructor Notes\Project 1\Example-Test-Code\src\test\resources\images\goodJPEG.jpeg|
-      | Earth2                          |D:\Revature\EricTrainingGithub\Copy of Instructor Notes\Project 1\Example-Test-Code\src\test\resources\images\goodPNG.png|
-      | Earth2                          |                                                                                                                       |
+      | Earth2                          |src/test/resources/images/goodJPG.jpg|
+      | Earth2                          |src/test/resources/images/goodJPEG.jpeg|
+      | Earth2                          |src/test/resources/images/goodPNG.png|
+      | Earth2                          | |
 
     # Sad path for Planets
   Scenario Outline: The user tries to upload a planet with invalid names or file type
@@ -36,7 +36,7 @@ Feature: Add new plant and moon findings
       | E-arth_3%                       |      | Invalid planet name |
       | Earth                           |      | Invalid planet name |
       # invalid file
-      | Earth2                          | D:\Revature\EricTrainingGithub\Copy of Instructor Notes\Project 1\Example-Test-Code\src\test\resources\images\No.gif  | Invalid file type   |
+      | Earth2                          | src/test/resources/images/No.gif | Invalid file type |
 
 
   # Happy Path for Moons
@@ -75,4 +75,4 @@ Feature: Add new plant and moon findings
       # Invalid planetID
       | Moon2                           | 100      |      | Invalid planet ID |
       # invalid file
-      | Moon2                           | 1        | D:\Revature\EricTrainingGithub\Copy of Instructor Notes\Project 1\Example-Test-Code\src\test\resources\images\No.gif  | Invalid file type |
+      | Moon2                           | 1        | src/test/resources/images/No.gif | Invalid file type |
